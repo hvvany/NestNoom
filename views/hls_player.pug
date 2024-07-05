@@ -1,0 +1,15 @@
+doctype html
+html(lang="ko")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title HLS Player
+    link(rel="stylesheet", href="https://unpkg.com/mvp.css")
+  body
+    header
+      h1 HLS Player 
+    main
+      video#video(width="960" height="540" controls)
+
+    script(src="/public/js/hls.js")
+    script(src="/public/js/hls_player.js")
