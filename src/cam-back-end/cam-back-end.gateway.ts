@@ -41,8 +41,8 @@ export class CamBackEndGateway
     ): void {
         console.log('offer');
         console.log(payload);
-        console.log(payload.offer);
-        client.to(payload.roomName).emit('offer', payload.offer);
+        console.log(payload[0]);
+        client.to(payload[1]).emit('offer', payload[0]);
     }
 
     @SubscribeMessage('answer')
@@ -51,7 +51,8 @@ export class CamBackEndGateway
         payload: { answer: string; roomName: string },
     ): void {
         console.log('answer');
-        client.to(payload.roomName).emit('answer', payload.answer);
+        console.log(payload[0])
+        client.to(payload[1]).emit('answer', payload[0]);
     }
 
     @SubscribeMessage('ice')
@@ -60,6 +61,6 @@ export class CamBackEndGateway
         payload: { ice: string; roomName: string },
     ): void {
         console.log('ice');
-        client.to(payload.roomName).emit('ice', payload.ice);
+        client.to(payload[1]).emit('ice', payload[0]);
     }
 }
