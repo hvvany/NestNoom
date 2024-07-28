@@ -1,10 +1,10 @@
-import { Controller, Get, Render } from '@nestjs/common';
+import { Controller, Get, Render } from "@nestjs/common";
 
-@Controller('facetime')
+@Controller("facetime")
 export class CamFrontEndController {
-    @Get()
-    @Render('face')
-    root() {
-        return { message: 'Hello world!' };
-    }
+  @Get()
+  @Render("index")
+  root() {
+    return { message: "Hello world!" };
+  }
 }

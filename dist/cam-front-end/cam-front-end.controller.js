@@ -13,18 +13,18 @@ exports.CamFrontEndController = void 0;
 const common_1 = require("@nestjs/common");
 let CamFrontEndController = class CamFrontEndController {
     root() {
-        return { message: 'Hello world!' };
+        return { message: "Hello world!" };
     }
 };
 __decorate([
     common_1.Get(),
-    common_1.Render('face'),
+    common_1.Render("index"),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], CamFrontEndController.prototype, "root", null);
 CamFrontEndController = __decorate([
-    common_1.Controller('facetime')
+    common_1.Controller("facetime")
 ], CamFrontEndController);
 exports.CamFrontEndController = CamFrontEndController;
 //# sourceMappingURL=cam-front-end.controller.js.map

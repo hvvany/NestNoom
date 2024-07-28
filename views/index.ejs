@@ -1,228 +1,420 @@
 <html>
-    <head>
-        <link
-            href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
-            rel="stylesheet"
-            id="bootstrap-css"
-        />
-        <link
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
-            type="text/css"
-            rel="stylesheet"
-        />
-        <link href="/style.css" type="text/css" rel="stylesheet" />
-        <script
-            src="https://cdn.socket.io/3.1.3/socket.io.min.js"
-            integrity="sha384-cPwlPLvBTa3sKAgddT6krw0cJat7egBga3DJepJyrLl4Q9/5WLra3rrnMcyTyOnh"
-            crossorigin="anonymous"
-        ></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-    </head>
+  <head>
+    <link
+      href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+      rel="stylesheet"
+      id="bootstrap-css"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+      type="text/css"
+      rel="stylesheet"
+    />
+    <link href="/style.css" type="text/css" rel="stylesheet" />
+    <script
+      src="https://cdn.socket.io/3.1.3/socket.io.min.js"
+      integrity="sha384-cPwlPLvBTa3sKAgddT6krw0cJat7egBga3DJepJyrLl4Q9/5WLra3rrnMcyTyOnh"
+      crossorigin="anonymous"
+    ></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+  </head>
 
-    <body>
-        <div class="container">
-            <h3 class="text-center">FaceTime</h3>
-            <div class="messaging">
-                <div class="inbox_msg">
-                    <div class="inbox_people">
-                        <div class="headind_srch">
-                            <div class="recent_heading">
-                                <h4>Chat Room</h4>
-                            </div>
-                            <div class="chatroom_btn_place">
-                                <button
-                                    type="button"
-                                    class="chatroom_btn setNickname"
-                                >
-                                    <i class="fa fa-cog" aria-hidden="true"></i>
-                                </button>
-                                <button
-                                    type="button"
-                                    class="chatroom_btn createChatRoom"
-                                >
-                                    <i
-                                        class="fa fa-plus"
-                                        aria-hidden="true"
-                                    ></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="inbox_chat chatRoomList"></div>
-                    </div>
-                    <div class="mesgs">
-                        <div class="msg_history chat"></div>
-                        <div class="type_msg">
-                            <div class="input_msg_write">
-                                <input
-                                    type="text"
-                                    class="write_msg"
-                                    placeholder="Type a message"
-                                />
-                                <button
-                                    class="msg_send_btn sendMessage"
-                                    type="button"
-                                >
-                                    <i
-                                        class="fa fa-paper-plane-o"
-                                        aria-hidden="true"
-                                    ></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <p class="text-center top_spac">
-                    Design by
-                    <a
-                        target="_blank"
-                        href="https://www.linkedin.com/in/sunil-rajput-nattho-singh/"
-                        >Sunil Rajput</a
-                    >
-                </p>
+  <body>
+    <div class="container">
+      <h3 class="text-center">CleverseClub</h3>
+      <div class="messaging">
+        <div class="inbox_msg">
+          <div class="inbox_people">
+            <div class="headind_srch">
+              <div class="recent_heading">
+                <h4>Chat Room</h4>
+              </div>
+              <div class="chatroom_btn_place">
+                <button type="button" class="chatroom_btn setNickname">
+                  <i class="fa fa-cog" aria-hidden="true"></i>
+                </button>
+                <button type="button" class="chatroom_btn createChatRoom">
+                  <i class="fa fa-plus" aria-hidden="true"></i>
+                </button>
+              </div>
             </div>
+            <div class="inbox_chat chatRoomList"></div>
+          </div>
+          <div class="teams_box">
+            <div class="faces" style="width: 70%">
+              <div id="call">
+                <div
+                  id="myStream"
+                  style="display: flex; flex-direction: column"
+                >
+                  <video
+                    id="myFace"
+                    autoplay
+                    playsinline
+                    width="40%"
+                    height="auto"
+                  ></video>
+                  <video
+                    id="peersFace"
+                    autoplay
+                    playsinline
+                    width="100%"
+                    height="auto"
+                  ></video>
+                  <button id="mute">Mute</button>
+                  <button id="camera">Turn Camera Off</button>
+                  <select id="cameras"></select>
+                </div>
+              </div>
+            </div>
+            <div class="mesgs">
+              <div class="msg_history chat"></div>
+              <div class="type_msg">
+                <div class="input_msg_write">
+                  <input
+                    type="text"
+                    class="write_msg"
+                    placeholder="Type a message"
+                  />
+                  <button class="msg_send_btn sendMessage" type="button">
+                    <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-    </body>
-    <!--
-    <body>
-        <div>
-            <h3>채팅방 목록</h3><br/>
-            <ul class="chatRoomList">
-            </ul>
-            <button class="createChatRoom">채팅방 만들기</button>
-        </div>
-        <div>
-            <h3>"<span class="roomName"></span>" 채팅내용</h3><br/>
-            <ul class="chat">
-            </ul>
-        </div>
-        <input type="text" class="text"/>
-        <button class="sendMessage">sned</button>
-        <br/>
-        <input type="text" class="nickname"/>
-        <button class="setNickname">setNickname</button>
-        <script>
-        </script>
-    </body>-->
-    <script>
-        let myInfo = {
-            nickname: null,
-            id: null,
-            room: {
-                roomId: null,
-                roomName: null,
-            },
-        };
-        const socket = io('http://localhost:8081');
-        socket.on('connect', function () {
-            console.log('Connected');
-            //연결 완료 후 로컬스토리지를 확인하여 닉네임 세팅
-            const nickname = localStorage.getItem('nickname');
-            socket.emit('setInit', { nickname }, (response) => {
-                myInfo.nickname = response.nickname;
-                myInfo.id = socket.id;
-                myInfo.room = response.room;
-                $('.nickname').val(myInfo.nickname);
-                $('.roomName').text(myInfo.room.roomName);
-            });
-            socket.emit('getChatRoomList', null);
-        });
-        socket.on('getMessage', function ({ id, nickname, message }) {
-            let html = '';
-            if (myInfo.id == id) {
-                html += '<div class="outgoing_msg">';
-                html += '<div class="sent_msg">';
-                html += '<p>' + message + '</p>';
-                html +=
-                    '<span class="time_date"> ' +
-                    nickname +
-                    '    | 11:01 AM    |    June 9</span>';
-                html += '</div>';
-                html += '</div>';
-            } else {
-                html += '<div class="incoming_msg">';
-                html += '<div class="received_msg">';
-                html += '<div class="received_withd_msg">';
-                html += '<p>' + message + '</p>';
-                html +=
-                    '<span class="time_date"> ' +
-                    nickname +
-                    '    | 11:01 AM    |    June 9</span>';
-                html += '</div>';
-                html += '</div>';
-                html += '</div>';
-            }
-            $('.chat').append(html);
-            $('.chat').scrollTop($('.chat')[0].scrollHeight);
-        });
-        socket.on('getChatRoomList', function (response) {
-            let html = '';
-            for (const { roomId, roomName } of Object.values(response)) {
-                html +=
-                    '<div class="chat_list ' +
-                    (myInfo.room.roomId === roomId
-                        ? 'active_chat'
-                        : 'enterChatRoom') +
-                    '" data-roomId="' +
-                    roomId +
-                    '">';
-                html += '<div class="chat_people">';
-                html += '<div class="chat_ib">';
-                html += '<h5>' + roomName + '</h5>';
-                html += '</div>';
-                html += '</div>';
-                html += '</div>';
-            }
-            $('.chatRoomList').html(html);
-        });
-        socket.on('disconnect', function () {
-            $('.chatRoomList').html('');
-            console.log('Disconnected');
-        });
 
-        //채팅방 생성
-        $('.createChatRoom').on('click', function () {
-            const roomName = prompt('채팅방 이름을 입력해주세요.');
-            if (!roomName) {
-                return false;
-            }
-            $('.chat').html('');
-            socket.emit('createChatRoom', roomName, (res) => {
-                if (!res) return;
-                myInfo.room = res;
-                $('.roomName').text(myInfo.room.roomName);
-                $('.chat').html('');
-            });
-            socket.emit('getChatRoomList', null);
-        });
+        <p class="text-center top_spac">
+          Design by
+          <a
+            target="_blank"
+            href="https://www.linkedin.com/in/sunil-rajput-nattho-singh/"
+            >Sunil Rajput</a
+          >
+        </p>
+      </div>
+    </div>
+  </body>
 
-        //채팅방 입장
-        $(document).on('click', '.enterChatRoom', function () {
-            const thisRoomId = $(this).attr('data-roomId');
-            socket.emit('enterChatRoom', thisRoomId, (res) => {
-                if (!res) return;
-                myInfo.room = res;
-                $('.roomName').text(myInfo.room.roomName);
-                $('.chat').html('');
-            });
-            socket.emit('getChatRoomList', null);
-        });
+  <script>
+    //-----------------------------------기존 채팅방 스크립트-----------------------------------
 
-        //메시지 전송
-        $('.sendMessage').on('click', function () {
-            socket.emit('sendMessage', $('.write_msg').val());
-            $('.write_msg').val('');
-        });
+    let myInfo = {
+      nickname: null,
+      id: null,
+      room: {
+        roomId: null,
+        roomName: null,
+      },
+    };
 
-        //닉네임 설정
-        $('.setNickname').on('click', function () {
-            const nickname = prompt('변경할 닉네임을 입력해주세요.');
-            if (!nickname) {
-                return false;
-            }
-            socket.emit('setNickname', nickname);
-            localStorage.setItem('nickname', nickname);
+    const socket = io("http://localhost:8080");
+
+    socket.on("connect", async function () {
+      console.log("Connected");
+      //연결 완료 후 로컬스토리지를 확인하여 닉네임 세팅
+      const nickname = localStorage.getItem("nickname");
+      await initCall();
+      socket.emit("setInit", { nickname }, (response) => {
+        myInfo.nickname = response.nickname;
+        myInfo.id = socket.id;
+        myInfo.room = response.room;
+        $(".nickname").val(myInfo.nickname);
+        $(".roomName").text(myInfo.room.roomName);
+        socket.emit("join_room", myInfo.room.roomName);
+        roomName = myInfo.room.roomName;
+      });
+      socket.emit("getChatRoomList", null);
+    });
+    socket.on("getMessage", function ({ id, nickname, message }) {
+      let html = "";
+      if (myInfo.id == id) {
+        html += '<div class="outgoing_msg">';
+        html += '<div class="sent_msg">';
+        html += "<p>" + message + "</p>";
+        html +=
+          '<span class="time_date"> ' +
+          nickname +
+          "    | 11:01 AM    |    June 9</span>";
+        html += "</div>";
+        html += "</div>";
+      } else {
+        html += '<div class="incoming_msg">';
+        html += '<div class="received_msg">';
+        html += '<div class="received_withd_msg">';
+        html += "<p>" + message + "</p>";
+        html +=
+          '<span class="time_date"> ' +
+          nickname +
+          "    | 11:01 AM    |    June 9</span>";
+        html += "</div>";
+        html += "</div>";
+        html += "</div>";
+      }
+      $(".chat").append(html);
+      $(".chat").scrollTop($(".chat")[0].scrollHeight);
+    });
+    socket.on("getChatRoomList", function (response) {
+      let html = "";
+      for (const { roomId, roomName } of Object.values(response)) {
+        html +=
+          '<div class="chat_list ' +
+          (myInfo.room.roomId === roomId ? "active_chat" : "enterChatRoom") +
+          '" data-roomId="' +
+          roomId +
+          '">';
+        html += '<div class="chat_people">';
+        html += '<div class="chat_ib">';
+        html += "<h5>" + roomName + "</h5>";
+        html += "</div>";
+        html += "</div>";
+        html += "</div>";
+      }
+      $(".chatRoomList").html(html);
+    });
+    socket.on("disconnect", function () {
+      $(".chatRoomList").html("");
+      console.log("Disconnected");
+    });
+
+    //채팅방 생성
+    $(".createChatRoom").on("click", async function () {
+      const roomName = prompt("채팅방 이름을 입력해주세요.");
+      if (!roomName) {
+        return false;
+      }
+      $(".chat").html("");
+      await initCall();
+      socket.emit("createChatRoom", roomName, (res) => {
+        if (!res) return;
+        myInfo.room = res;
+        $(".roomName").text(myInfo.room.roomName);
+        $(".chat").html("");
+      });
+      socket.emit("getChatRoomList", null);
+    });
+
+    //채팅방 입장
+    $(document).on("click", ".enterChatRoom", async function () {
+      const thisRoomId = $(this).attr("data-roomId");
+      await initCall();
+      socket.emit("enterChatRoom", thisRoomId, (res) => {
+        if (!res) return;
+        myInfo.room = res;
+        $(".roomName").text(myInfo.room.roomName);
+        $(".chat").html("");
+      });
+      socket.emit("getChatRoomList", null);
+    });
+
+    //메시지 전송
+    $(".sendMessage").on("click", function () {
+      socket.emit("sendMessage", $(".write_msg").val());
+      $(".write_msg").val("");
+    });
+
+    //닉네임 설정
+    $(".setNickname").on("click", function () {
+      const nickname = prompt("변경할 닉네임을 입력해주세요.");
+      if (!nickname) {
+        return false;
+      }
+      socket.emit("setNickname", nickname);
+      localStorage.setItem("nickname", nickname);
+    });
+
+    //------------------------------ 화상채팅 스크립트_web-rtc with socket ------------------>
+    const myFace = document.getElementById("myFace");
+    const muteBtn = document.getElementById("mute");
+    const cameraBtn = document.getElementById("camera");
+    const cameraSelect = document.getElementById("cameras");
+    const call = document.getElementById("call");
+    // call.hidden = true;
+
+    let myStream;
+    let muted = false;
+    let cameraOff = false;
+    let roomName = myInfo.room.roomName;
+    let myPeerConnection;
+    let myDataChannel;
+
+    // const socket = io("http://localhost:8080");
+    // Socket Code
+    socket.on("welcome", async () => {
+      console.log("welcome");
+      myDataChannel = myPeerConnection.createDataChannel("chat");
+      myDataChannel.addEventListener("message", (event) =>
+        console.log(event.data)
+      );
+      console.log("made data channel");
+      const offer = await myPeerConnection.createOffer();
+      myPeerConnection.setLocalDescription(offer);
+      console.log("sent the offer");
+      socket.emit("offer", offer, roomName);
+    });
+
+    socket.on("offer", async (offer) => {
+      myPeerConnection.addEventListener("datachannel", (event) => {
+        myDataChannel = event.channel;
+        myDataChannel.addEventListener("message", (event) =>
+          console.log(event.data)
+        );
+      });
+      console.log("received the offer");
+      myPeerConnection.setRemoteDescription(offer);
+      const answer = await myPeerConnection.createAnswer();
+      myPeerConnection.setLocalDescription(answer);
+      socket.emit("answer", answer, roomName);
+      console.log("sent the answer");
+    });
+
+    socket.on("answer", (answer) => {
+      console.log("received the answer");
+      myPeerConnection.setRemoteDescription(answer);
+    });
+
+    socket.on("ice", (ice) => {
+      console.log("received candidate");
+      myPeerConnection.addIceCandidate(ice);
+    });
+
+    // RTC Code
+    function makeConnection() {
+      myPeerConnection = new RTCPeerConnection({
+        iceServers: [
+          {
+            urls: [
+              "stun:stun.l.google.com:19302",
+              "stun:stun1.l.google.com:19302",
+              "stun:stun2.l.google.com:19302",
+              "stun:stun3.l.google.com:19302",
+              "stun:stun4.l.google.com:19302",
+            ],
+          },
+        ],
+      });
+      myPeerConnection.addEventListener("icecandidate", handleIce);
+      myPeerConnection.addEventListener("addstream", handleAddStream);
+      myStream
+        .getTracks()
+        .forEach((track) => myPeerConnection.addTrack(track, myStream));
+    }
+
+    function handleIce(data) {
+      console.log("sent candidate");
+      socket.emit("ice", data.candidate, roomName);
+    }
+
+    function handleAddStream(data) {
+      const peersFace = document.getElementById("peersFace");
+      peersFace.srcObject = data.stream;
+    }
+
+    async function getCameras() {
+      try {
+        const devices = await navigator.mediaDevices.enumerateDevices();
+        const cameras = devices.filter(
+          (device) => device.kind === "videoinput"
+        );
+        const currentCamera = myStream.getVideoTracks()[0];
+        cameras.forEach((camera) => {
+          const option = document.createElement("option");
+          option.value = camera.deviceId;
+          option.innerText = camera.label;
+          if (currentCamera.label === camera.label) {
+            option.selected = true;
+          }
+          cameraSelect.appendChild(option);
         });
-    </script>
+      } catch (e) {
+        console.log(e);
+      }
+    }
+
+    async function getMedia(deviceId) {
+      const initialConstraints = {
+        audio: true,
+        video: { facingMode: "user" },
+      };
+      const cameraConstraints = {
+        audio: true,
+        video: { deviceId: { exact: deviceId } },
+      };
+      try {
+        myStream = await navigator.mediaDevices.getUserMedia(
+          deviceId ? cameraConstraints : initialConstraints
+        );
+        myFace.srcObject = myStream;
+        if (!deviceId) {
+          await getCameras();
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    }
+
+    function handleMuteClick() {
+      myStream
+        .getAudioTracks()
+        .forEach((track) => (track.enabled = !track.enabled));
+      if (!muted) {
+        muteBtn.innerText = "Unmute";
+        muted = true;
+      } else {
+        muteBtn.innerText = "Mute";
+        muted = false;
+      }
+    }
+
+    function handleCameraClick() {
+      myStream
+        .getVideoTracks()
+        .forEach((track) => (track.enabled = !track.enabled));
+      if (cameraOff) {
+        cameraBtn.innerText = "Turn Camera Off";
+        cameraOff = false;
+      } else {
+        cameraBtn.innerText = "Turn Camera On";
+        cameraOff = true;
+      }
+    }
+
+    async function handleCameraChange() {
+      await getMedia(cameraSelect.value);
+      if (myPeerConnection) {
+        const videoTrack = myStream.getVideoTracks()[0];
+        const videoSender = myPeerConnection
+          .getSenders()
+          .find((sender) => sender.track.kind === "video");
+        videoSender.replaceTrack(videoTrack);
+      }
+    }
+
+    muteBtn.addEventListener("click", handleMuteClick);
+    cameraBtn.addEventListener("click", handleCameraClick);
+    cameraSelect.addEventListener("input", handleCameraChange);
+
+    // Welcome Form (join a room)
+    // const welcome = document.getElementById("welcome");
+    // const welcomeForm = welcome.querySelector("form");
+
+    async function initCall() {
+      await getMedia();
+      makeConnection();
+    }
+
+    // async function handleWelcomeSubmit(event) {
+    //   event.preventDefault();
+    //   const input = welcomeForm.querySelector("input");
+    //   await initCall();
+    //   console.log(input.value);
+    //   socket.emit("join_room", input.value);
+    //   roomName = input.value;
+    //   input.value = "";
+    // }
+
+    // welcomeForm.addEventListener("submit", handleWelcomeSubmit);
+  </script>
 </html>
